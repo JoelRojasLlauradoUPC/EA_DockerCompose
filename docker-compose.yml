@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  webapptrip2guide:
+    image: joelrojasllauradoupc/webapptrip2guide
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backendtrip2guide
+
+  backofficetrip2guide:
+    image: joelrojasllauradoupc/backofficetrip2guide
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backendtrip2guide
+
+  backendtrip2guide:
+    image: joelrojasllauradoupc/backendtrip2guide
+    ports:
+      - "1337:1337"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/trip2guide
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
