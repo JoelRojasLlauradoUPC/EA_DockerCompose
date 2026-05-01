@@ -1,27 +1,30 @@
-version: '3.8'
 services:
   webapptrip2guide:
-    image: joelrojasllauradoupc/webapptrip2guide
+    image: joelrojasllauradoupc/webapptrip2guide:1.0.0-b7740bb
     ports:
       - "5173:5173"
     depends_on:
       - backendtrip2guide
+    env_file:
+      - .env.${DOCKER_PROFILE}
 
   backofficetrip2guide:
-    image: joelrojasllauradoupc/backofficetrip2guide
+    image: joelrojasllauradoupc/backofficetrip2guide:eb66016
     ports:
       - "4200:4200"
     depends_on:
       - backendtrip2guide
+    env_file:
+      - .env.${DOCKER_PROFILE}
 
   backendtrip2guide:
-    image: joelrojasllauradoupc/backendtrip2guide
+    image: joelrojasllauradoupc/backendtrip2guide:1.0.0-45f8e2b
     ports:
       - "1337:1337"
-    environment:
-      - MONGO_URL=mongodb://mongodb:27017/trip2guide
     depends_on:
       - mongodb
+    env_file:
+      - .env.${DOCKER_PROFILE}
 
   mongodb:
     image: mongo:latest
@@ -32,3 +35,10 @@ services:
 
 volumes:
   mongo_data:
+
+x-environment-variables:
+  profiles:
+    development:
+      DOCKER_PROFILE: development
+    production:
+      DOCKER_PROFILE: production
