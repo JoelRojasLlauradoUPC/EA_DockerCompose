@@ -1,6 +1,6 @@
 services:
   webapptrip2guide:
-    image: joelrojasllauradoupc/webapptrip2guide:1.1.0-mapa_ruta11
+    image: joelrojasllauradoupc/webapptrip2guide:1.3.0-57ac490
     ports:
       - "5173:5173"
     depends_on:
@@ -9,7 +9,7 @@ services:
       - .env.${DOCKER_PROFILE}
 
   backofficetrip2guide:
-    image: joelrojasllauradoupc/backofficetrip2guide:1.1.0-merge_historial
+    image: joelrojasllauradoupc/backofficetrip2guide:1.3.0-dbc846c
     ports:
       - "4200:4200"
     depends_on:
@@ -18,7 +18,7 @@ services:
       - .env.${DOCKER_PROFILE}
 
   backendtrip2guide:
-    image: joelrojasllauradoupc/backendtrip2guide:1.1.0-merge_historial
+    image: joelrojasllauradoupc/backendtrip2guide:1.3.0-e2d0262
     ports:
       - "1337:1337"
     depends_on:
