@@ -25,6 +25,8 @@ services:
       - mongodb
     env_file:
       - .env.${DOCKER_PROFILE}
+    volumes:
+      - ./secrets/firebase-service-account.json:/run/secrets/firebase-service-account.json:ro
 
   mongodb:
     image: mongo:latest
