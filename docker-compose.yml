@@ -48,6 +48,8 @@ services:
 
   matomo:
     image: matomo:5-apache
+    ports:
+      - "8080:80"
     profiles:
       - production
     restart: unless-stopped
@@ -61,27 +63,10 @@ services:
     volumes:
       - matomo_data:/var/www/html
 
-  caddy:
-    image: caddy:2
-    profiles:
-      - production
-    restart: unless-stopped
-    depends_on:
-      - matomo
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-
 volumes:
   mongo_data:
   matomo_db_data:
   matomo_data:
-  caddy_data:
-  caddy_config:
 
 x-environment-variables:
   profiles:
