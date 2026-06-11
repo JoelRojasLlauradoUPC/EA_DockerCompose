@@ -53,8 +53,6 @@ services:
     restart: unless-stopped
     depends_on:
       - matomo-db
-    ports:
-      - "8080:80"
     environment:
       MATOMO_DATABASE_HOST: matomo-db
       MATOMO_DATABASE_USERNAME: ${MATOMO_DATABASE_USER}
@@ -62,6 +60,21 @@ services:
       MATOMO_DATABASE_DBNAME: ${MATOMO_DATABASE_NAME}
     volumes:
       - matomo_data:/var/www/html
+
+  caddy:
+    image: caddy:2
+    profiles:
+      - production
+    restart: unless-stopped
+    depends_on:
+      - matomo
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
 
 volumes:
   mongo_data:
