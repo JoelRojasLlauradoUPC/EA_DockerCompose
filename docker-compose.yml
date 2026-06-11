@@ -80,6 +80,8 @@ volumes:
   mongo_data:
   matomo_db_data:
   matomo_data:
+  caddy_data:
+  caddy_config:
 
 x-environment-variables:
   profiles:
