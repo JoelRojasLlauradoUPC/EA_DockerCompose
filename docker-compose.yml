@@ -72,3 +72,10 @@ volumes:
   mongo_data:
   matomo_db_data:
   matomo_data:
+
+x-environment-variables:
+  profiles:
+    development:
+      DOCKER_PROFILE: development
+    production:
+      DOCKER_PROFILE: production
