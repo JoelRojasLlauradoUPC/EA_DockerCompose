@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   backendtrip2guide:
-    image: joelrojasllauradoupc/backendtrip2guide:1.4.2-9b53ab5
+    image: joelrojasllauradoupc/backendtrip2guide:1.4.2-9b43ab5
     ports:
       - "1337:1337"
     depends_on:
