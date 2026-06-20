@@ -1,40 +1,47 @@
 services:
   webapptrip2guide:
-    image: joelrojasllauradoupc/webapptrip2guide:1.4.5.-60196a0
+    image: joelrojasllauradoupc/webapptrip2guide:1.5.0-79b1c19
     ports:
       - "5173:5173"
     depends_on:
       - backendtrip2guide
     env_file:
       - .env.${DOCKER_PROFILE}
+    networks:
+      - frontend_net
     restart: unless-stopped
 
   backofficetrip2guide:
-    image: joelrojasllauradoupc/backofficetrip2guide:1.3.0-dbc846c
+    image: joelrojasllauradoupc/backofficetrip2guide:1.4.0-c970717
     ports:
       - "4200:4200"
     depends_on:
       - backendtrip2guide
     env_file:
       - .env.${DOCKER_PROFILE}
+    networks:
+      - frontend_net
     restart: unless-stopped
 
   backendtrip2guide:
-    image: joelrojasllauradoupc/backendtrip2guide:1.4.2-9b43ab5
+    image: joelrojasllauradoupc/backendtrip2guide:1.5.0-8a7fd3c
     ports:
       - "1337:1337"
     depends_on:
       - mongodb
     env_file:
       - .env.${DOCKER_PROFILE}
+    networks:
+      - backend_internal
+      - frontend_net
     restart: unless-stopped
 
   mongodb:
     image: mongo:latest
-    ports:
-      - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - backend_internal
     restart: unless-stopped
 
   matomo-db:
@@ -72,6 +79,13 @@ volumes:
   mongo_data:
   matomo_db_data:
   matomo_data:
+
+networks:
+  backend_internal:
+    driver: bridge
+    internal: true
+  frontend_net:
+    driver: bridge
 
 x-environment-variables:
   profiles:
