@@ -1,6 +1,6 @@
 services:
   webapptrip2guide:
-    image: joelrojasllauradoupc/webapptrip2guide:1.5.0-79b1c19
+    image: joelrojasllauradoupc/webapptrip2guide:1.5.1-60d12a8
     ports:
       - "5173:5173"
     depends_on:
