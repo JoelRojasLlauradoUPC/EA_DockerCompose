@@ -1,6 +1,6 @@
 services:
   webapptrip2guide:
-    image: joelrojasllauradoupc/webapptrip2guide:1.5.1-60d12a8
+    image: joelrojasllauradoupc/webapptrip2guide:1.5.2-1cd5dc9
     ports:
       - "5173:5173"
     depends_on:
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
 
   backendtrip2guide:
-    image: joelrojasllauradoupc/backendtrip2guide:1.5.0-8a7fd3c
+    image: joelrojasllauradoupc/backendtrip2guide:1.5.1-8d33d2f
     ports:
       - "1337:1337"
     depends_on:
